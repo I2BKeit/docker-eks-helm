@@ -1,7 +1,11 @@
 
-node{
+node{  
 stage('gitClone'){
 git 'https://github.com/I2BKeit/docker-eks-helm.git'
+
+} 
+stage('dockerize'){
+docker build -t ikapro .
 
 }
 
