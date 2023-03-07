@@ -1,14 +1,25 @@
-
 node{  
 stage('gitClone'){
 git 'https://github.com/I2BKeit/docker-eks-helm.git'
-
-} 
-stage('dockerize'){
-docker build -t ikapro .
-
+stage('delete present image'){
+    sh 'docker rmi -f $(docker images -q)'
 }
 
 
+stage('dockerize'){
+sh 'docker build -t 12bk/po1 .'
 
+
+}
+stage('dockerhub-auth'){
+withCredentials([string(credentialsId: 'Docker-hub', variable: 'docker')]) {
+  sh 'docker login -u 12bk -p ${docker}'
+    // some block
+}
+ 
+   
+
+sh 'docker push 12bk/po1'
+}
+}
 }
