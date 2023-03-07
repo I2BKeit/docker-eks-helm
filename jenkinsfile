@@ -23,6 +23,6 @@ sh 'docker push 12bk/po1'
 }
 }
 stage('Deploy to kubenetes'){
-sh 'kubectl apply -f deploy.yml
+sh 'kubectl apply -f deploy.yml'
 }
 }
